@@ -1,0 +1,25 @@
+{
+  "name": "dius-shopping-es6",
+  "version": "1.0.0",
+  "description": "shopping checkout es6",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srikanth-eppalapally/Dius-Shopping-es6.git"
+  },
+  "author": "srikanth eppalapally",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srikanth-eppalapally/Dius-Shopping-es6/issues"
+  },
+  "homepage": "https://github.com/srikanth-eppalapally/Dius-Shopping-es6#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
