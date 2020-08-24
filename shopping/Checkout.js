@@ -1,11 +1,22 @@
 import dealType from './Deals';
 
-export default class Checkout {
+
+/**
+ * @type class CheckOut
+ * @description Provides scanning and totals for checkout system
+ */
+
+export default class CheckOut {
     constructor(pricingRules) {
         this.pricingRules = pricingRules;
         this.shoppingBag = [];
     }
 
+
+    /**
+     * @type method scan
+     * @param {*} skuId accepts product skuId and add product to shopping bag
+     */
 
     scan(skuId) {
         const isSameProduct = this.shoppingBag.some(pro => pro.skuId === skuId);
@@ -19,6 +30,11 @@ export default class Checkout {
             this.addItemsToBag(skuId);
         }
     }
+
+    /**
+     * @type method addItemsToBag
+     * @param {*} skuId accepts skuId of new product into shopping bag
+     */
 
     addItemsToBag(skuId) {
         const product = this.pricingRules.find(pro => pro.skuId === skuId);
@@ -37,8 +53,14 @@ export default class Checkout {
     }
 
 
+    /**
+     * @type method total
+     * @description calculate totalPrice of shopping bag
+     */
+
+
     total() {
-        return this.shoppingBag.reduce((total, item) => {
+        const totalPrice = this.shoppingBag.reduce((total, item) => {
             const product = this.pricingRules.find(prod => prod.skuId === item.skuId);
             if (product && product.deals) {
                 switch (product.deals.dealType) {
@@ -56,8 +78,17 @@ export default class Checkout {
             total += item.quantity * item.unitPrice;
             return total;
         }, 0);
+        console.log(this.shoppingBag);
+        return totalPrice;
 
     }
+
+    /**
+     * @type method purchaseMore
+     * @param {*} item shoppingBag product
+     * @param {*} product pricingRules for product
+     * @description evalualtes unit price for products with Bulk purchase deals
+     */
 
     purchaseMore(item, product) {
         const { dealQuantity, afterPrice } = product.deals;
@@ -67,6 +98,14 @@ export default class Checkout {
         }
         return item;
     }
+
+
+    /**
+     * @type method freeProduct
+     * @param {*} item shoppingBag product
+     * @param {*} product pricingRules for product
+     * @description evalualtes unit price for products with free product deals
+     */
 
 
     freeProduct(item, product) {
@@ -88,6 +127,13 @@ export default class Checkout {
         return item;
     }
 
+
+    /**
+     * @type method buySomegetSome
+     * @param {*} item shoppingBag product
+     * @param {*} product pricingRules for product
+     * @description evalualtes unit price for products with Buy some and get some deals
+     */
 
     buySomegetSome(item, product) {
         const { quantity } = item;
